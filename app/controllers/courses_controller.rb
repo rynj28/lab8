@@ -1,70 +1,74 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_section, only: %i[ show edit update destroy ]
 
-  # GET /courses or /courses.json
+  # GET /sections or /sections.json
   def index
-    @courses = Course.all
+    @courses = Courses.all.includes(:student)
   end
 
-  # GET /courses/1 or /courses/1.json
+  # GET /sections/1 or /sections/1.json
   def show
+   @courses = Courses.find(params[:id])
+   @subject = @section.subject
+   @teacher = @subject.teacher
+   @students = @subject.students
   end
 
-  # GET /courses/new
+  # GET /sections/new
   def new
-    @course = Course.new
+    @courses = Courses.new
   end
 
-  # GET /courses/1/edit
+  # GET /sections/1/edit
   def edit
   end
 
-  # POST /courses or /courses.json
+  # POST /sections or /sections.json
   def create
-    @course = Course.new(course_params)
+    @courses = Courses.new(section_params)
 
     respond_to do |format|
-      if @course.save
-        format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
-        format.json { render :show, status: :created, location: @course }
+      if @courses.save
+        format.html { redirect_to section_url(@courses), notice: "Section was successfully created." }
+        format.json { render :show, status: :created, location: @courses }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: @courses.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /courses/1 or /courses/1.json
+  # PATCH/PUT /sections/1 or /sections/1.json
   def update
     respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to course_url(@course), notice: "Course was successfully updated." }
-        format.json { render :show, status: :ok, location: @course }
+      if @courses.update(section_params)
+        format.html { redirect_to section_url(@courses), notice: "Courses was successfully updated." }
+        format.json { render :show, status: :ok, location: @courses }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: @courses.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /courses/1 or /courses/1.json
+  # DELETE /sections/1 or /sections/1.json
   def destroy
-    @course.destroy
+    @courses.destroy
 
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
+      format.html { redirect_to sections_url, notice: "Courses was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
+    def set_courses
+      @courses = Courses.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:subject_id, :student_id)
+    def courses_params
+      params.require(:section).permit(:name, :student_id, :subject_id)
     end
 end
