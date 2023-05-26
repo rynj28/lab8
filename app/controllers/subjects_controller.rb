@@ -3,11 +3,13 @@ class SubjectsController < ApplicationController
 
   # GET /subjects or /subjects.json
   def index
-    @subjects = Subject.all
+     @subjects = Subject.all.includes(:students)
   end
 
   # GET /subjects/1 or /subjects/1.json
   def show
+    @subject = Subject.find(params[:id])
+    @sections = @subject.sections.includes(:student)
   end
 
   # GET /subjects/new
@@ -65,6 +67,6 @@ class SubjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def subject_params
-      params.require(:subject).permit(:name, :section, :number_of_units, :teacher_id)
+      params.require(:subject).permit(:name, :room, :student_id, :teacher_id)
     end
 end

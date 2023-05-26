@@ -1,10 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @course %>
+<h1><%= @course.name %></h1>
 
-<div>
-  <%= link_to "Edit this course", edit_course_path(@course) %> |
-  <%= link_to "Back to courses", courses_path %>
+<h2>Subject:</h2>
+<ul>
+  <li><%= link_to @subject.name, @subject %></li>
+  <li>Teacher: <%= link_to @teacher.name, @teacher %></li>
+</ul>
 
-  <%= button_to "Destroy this course", @course, method: :delete %>
-</div>
+<h2>Students:</h2>
+<ul>
+  <% @students.each do |student| %>
+    <li><%= link_to student.name, student %></li>
+  <% end %>
+</ul>

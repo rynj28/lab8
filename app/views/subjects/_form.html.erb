@@ -17,18 +17,18 @@
   </div>
 
   <div>
-    <%= form.label :section, style: "display: block" %>
-    <%= form.text_field :section %>
+    <%= form.label :room, style: "display: block" %>
+    <%= form.text_field :room %>
   </div>
 
-  <div>
-    <%= form.label :number_of_units, style: "display: block" %>
-    <%= form.number_field :number_of_units %>
+  <div class="field">
+    <%= form.label :student_id %>
+    <%= collection_select(:subject, :student_id, Student.all, :id, :name) %>
   </div>
 
-  <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= collection_select(:subject, :teacher_id, Teacher.all, :id, :name) %>
   </div>
 
   <div>
