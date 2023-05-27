@@ -1,14 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= @subject.name %></h1>
+<%= render @subject %>
+List of Students:
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Year Level</th>
+      </tr>
+    </thead>
 
-<h2>Courses:</h2>
-<ul>
-  <% @courses.each do |courses| %>
-    <li><%= course.name %></li>
-    <ul>
-      <li>Student: <%= link_to course.student.name, course.student %></li>
-      <li>Teacher: <%= link_to @subject.teacher.name, @subject.teacher %></li>
-    </ul>
-  <% end %>
-</ul>
+    <tbody>
+    <% @subject.students.each do |student| %>
+    <tr>
+      <td><%= student.name %></td>
+      <td><%= student.year_level %></td>
+      <td><%= link_to course.student.name, student_path(subject.student) %></td>
+    <% end %>
+    </tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
+  <%= link_to "Back to subjects", subjects_path %>
+
+  <%= button_to "Destroy this subject", @subject, method: :delete %>
+</div>

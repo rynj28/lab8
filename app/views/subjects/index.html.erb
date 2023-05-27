@@ -2,15 +2,13 @@
 
 <h1>Subjects</h1>
 
-<ul>
+<div id="subjects">
   <% @subjects.each do |subject| %>
-    <li><%= link_to subject.name, subject %></li>
-    <ul>
-      <% subject.students.each do |student| %>
-        <li><%= link_to student.name, student %></li>
-      <% end %>
-    </ul>
+    <%= render subject %>
+    <p>
+      <%= link_to "Show this subject", subject %>
+    </p>
   <% end %>
-</ul>
+</div>
 
 <%= link_to "New subject", new_subject_path %>

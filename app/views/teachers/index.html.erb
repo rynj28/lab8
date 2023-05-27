@@ -2,15 +2,13 @@
 
 <h1>Teachers</h1>
 
-<ul>
+<div id="teachers">
   <% @teachers.each do |teacher| %>
-    <li><%= link_to teacher.name, teacher %></li>
-    <ul>
-      <% teacher.subjects.each do |subject| %>
-        <li><%= link_to subject.name, subject %></li>
-      <% end %>
-    </ul>
+    <%= render teacher %>
+    <p>
+      <%= link_to "Show this teacher", teacher %>
+    </p>
   <% end %>
-</ul>
+</div>
 
 <%= link_to "New teacher", new_teacher_path %>
