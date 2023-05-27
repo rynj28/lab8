@@ -1,10 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= @teacher.name %></h1>
+<%= render @teacher %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Room</th>
+      <th>Section</th>
+    </tr>
+  </thead>
 
-<h2>Subjects:</h2>
-<ul>
-  <% @subjects.each do |subject| %>
-    <li><%= link_to subject.name, subject %></li>
-  <% end %>
-</ul>
+  <tbody>
+  <% @teacher.subjects.each do |subject| %>
+  <tr>
+    <td><%= subject.name %></td>
+    <td><%= subject.section %></td>
+    <td><%= subject.number_of_units %></td>
+    <% end %>
+  </tr>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this teacher", edit_teacher_path(@teacher) %> |
+  <%= link_to "Back to teachers", teachers_path %>
+
+  <%= button_to "Destroy this teacher", @teacher, method: :delete %>
+</div>

@@ -1,70 +1,72 @@
-class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+class StudentsController < ApplicationController
+  before_action :set_student, only: %i[ show edit update destroy ]
 
-  # GET /courses or /courses.json
+  # GET /students or /students.json
   def index
-    @courses = Course.all
+     @students = Student.all.includes(:subjects)
   end
 
-  # GET /courses/1 or /courses/1.json
+  # GET /students/1 or /students/1.json
   def show
+  @student = Student.find(params[:id])
+  @subjects = @student.subjects.includes(:sections)
   end
 
-  # GET /courses/new
+  # GET /students/new
   def new
-    @course = Course.new
+    @student = Student.new
   end
 
-  # GET /courses/1/edit
+  # GET /students/1/edit
   def edit
   end
 
-  # POST /courses or /courses.json
+  # POST /students or /students.json
   def create
-    @course = Course.new(course_params)
+    @student = Student.new(student_params)
 
     respond_to do |format|
-      if @course.save
-        format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
-        format.json { render :show, status: :created, location: @course }
+      if @student.save
+        format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
+        format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /courses/1 or /courses/1.json
+  # PATCH/PUT /students/1 or /students/1.json
   def update
     respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to course_url(@course), notice: "Course was successfully updated." }
-        format.json { render :show, status: :ok, location: @course }
+      if @student.update(student_params)
+        format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
+        format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /courses/1 or /courses/1.json
+  # DELETE /students/1 or /students/1.json
   def destroy
-    @course.destroy
+    @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
+      format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
+    def set_student
+      @student = Student.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:student_id, :subject_id)
+    def student_params
+      params.require(:student).permit(:name, :course, :year_level)
     end
 end

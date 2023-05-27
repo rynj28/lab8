@@ -17,6 +17,16 @@
   </div>
 
   <div>
+    <%= form.label :department, style: "display: block" %>
+    <%= form.text_field :department %>
+  </div>
+
+  <div>
+    <%= form.label :per_unit_rate, style: "display: block" %>
+    <%= form.number_field :per_unit_rate %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
