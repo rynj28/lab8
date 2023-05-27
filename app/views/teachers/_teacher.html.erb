@@ -14,15 +14,4 @@
     <%= teacher.per_unit_rate %>
   </p>
 
-  <p>
-    <strong>Avatar:</strong>
-    <%= image_tag teacher.avatar %>
-  </p>
-
-  <p>
-    <% teacher&.id_cards&.map do |id| %>
-      <p<%= id.filename%></p>
-    <% end %>
-  </p>
-
 </div>
