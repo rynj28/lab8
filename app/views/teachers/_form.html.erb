@@ -29,4 +29,13 @@
   <div>
     <%= form.submit %>
   </div>
+
+  <div>
+    <%= form.label :avatar %>
+      <%= form.file_field :avatar %>
+  </div>
+  <div>
+    <%= form.label :id_cards %>
+      <%= form.file_field :id_cards, { multiple: true} %>
+  </div>
 <% end %>
