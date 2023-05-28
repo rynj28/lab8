@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div>
     <%= form.label :student_id, style: "display: block" %>
-    <%= collection_select(:course, :student_id, Student.all, :id, :name) %>
+    <%= form.text_field :student_id %>
   </div>
 
-  <div class="field">
+  <div>
     <%= form.label :subject_id, style: "display: block" %>
-    <%= collection_select(:course, :subject_id, Subject.all, :id, :name) %>
+    <%= form.text_field :subject_id %>
   </div>
 
   <div>
